@@ -1,0 +1,31 @@
+.todo {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e6e6e6;
+  cursor: pointer;
+  color: inherit;
+}
+
+.todo-name {
+  flex-grow: 1;
+  word-break: break-all;
+  line-height: 1.2;
+  transition: color 0.4s;
+  font-size: 25px;
+  padding: 15px;
+}
+
+.icon-circle {
+  font-size: 35px;
+  color: rgb(136, 136, 136);
+}
+
+.close-icon {
+  font-size: 15px;
+  margin-right: 10px;
+  color: rgb(136, 136, 136);
+}
+
+.close-icon:hover {
+  color: #000;
+}
