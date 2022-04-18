@@ -1,0 +1,19 @@
+.input {
+  width: 100%;
+  padding: 16px 16px 16px 60px;
+  border: none;
+  border-bottom: 2px solid #e6e6e6;
+  background: rgba(0, 0, 0, 0.003);
+  box-shadow: inset 0 -2px 1px rgb(0 0 0 / 3%);
+  font-size: 24px;
+  line-height: 1.4em;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.input::placeholder {
+  font-style: italic;
+  color: #e6e6e6;
+}
