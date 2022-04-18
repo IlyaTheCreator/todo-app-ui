@@ -1,3 +1,7 @@
 .title {
-  color: pink;
+  margin-top: 130px;
+  font-size: 100px;
+  font-weight: 100;
+  text-align: center;
+  color: rgba(175, 47, 47, 0.15);
 }
