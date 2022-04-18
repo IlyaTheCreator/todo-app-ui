@@ -9,9 +9,10 @@ type Inputs = {
 
 interface AddTodoProps {
   addTodo: (name: string) => void;
+  toggleAllTodos: () => void;
 }
 
-const AddTodo: React.FC<AddTodoProps> = ({ addTodo }) => {
+const AddTodo: React.FC<AddTodoProps> = ({ addTodo, toggleAllTodos }) => {
   const { register, handleSubmit } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data, e) => {
@@ -21,7 +22,10 @@ const AddTodo: React.FC<AddTodoProps> = ({ addTodo }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <i className={`icon-down-open ${classes["down-icon"]}`} />
+      <i
+        onClick={toggleAllTodos}
+        className={`icon-down-open ${classes["down-icon"]}`}
+      />
       <input
         className={classes.input}
         {...register("name")}

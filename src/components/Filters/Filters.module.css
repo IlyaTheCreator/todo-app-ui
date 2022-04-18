@@ -1,0 +1,31 @@
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: inherit;
+}
+
+.filter-btn {
+  margin: 3px;
+  padding: 3px 7px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+.active-filter-btn {
+  border: 1px solid orange;
+}
+
+.clear-completed-btn {
+  margin: 0;
+  padding: 0;
+}
+
+.clear-completed-btn:hover {
+  text-decoration: underline;
+}

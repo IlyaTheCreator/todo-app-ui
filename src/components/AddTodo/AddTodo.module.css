@@ -26,4 +26,10 @@
   left: 10px;
   font-size: 22px;
   color: #e6e6e6;
+  z-index: 1;
+}
+
+.down-icon:hover {
+  cursor: pointer;
+  color: rgb(121, 121, 121);
 }

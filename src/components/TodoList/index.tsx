@@ -3,8 +3,6 @@ import Todo from "./Todo";
 
 import { Todo as TodoType } from "../TodosManager";
 
-// import classes from "./TodoList.module.css";
-
 interface TodoListProps {
   todos: TodoType[];
   toggleTodo: (id: string) => void;
