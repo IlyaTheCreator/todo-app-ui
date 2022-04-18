@@ -16,6 +16,7 @@ const AddTodo: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <i className={`icon-down-open ${classes["down-icon"]}`} />
       <input
         className={classes.input}
         {...register("name")}

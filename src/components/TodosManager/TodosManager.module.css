@@ -26,7 +26,7 @@
   border: 1px solid #e6e6e6;
   width: calc(100% - 16px);
   left: 8px;
-  bottom: -9.5px;
+  bottom: -10px;
   z-index: -2;
   background: #fff;
   box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%);
