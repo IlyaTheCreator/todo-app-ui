@@ -1,22 +1,26 @@
 import React, { useState } from "react";
+import { Todo as TodoType } from "../../TodosManager";
 
 import classes from "./Todo.module.css";
 
 interface TodoProps {
-  name: string;
-  isCompleted: boolean;
-  onClick: (data: any) => void;
+  todo: TodoType;
+  toggleTodo: (id: string) => void;
+  deleteTodo: (id: string) => void;
   key: any;
 }
 
-const Todo: React.FC<TodoProps> = ({ name, isCompleted, onClick }) => {
+const Todo: React.FC<TodoProps> = ({ todo, toggleTodo, deleteTodo }) => {
   const [closeIconShown, setCloseIconShown] = useState<boolean>(false);
 
   const mouseEnterHandler = () => setCloseIconShown(true);
+
   const mouseLeaveHandler = () => setCloseIconShown(false);
 
+  const deleteIconClickHandler = () => deleteTodo(todo.id);
+
   const circleIconClasses = [classes["icon-circle"]];
-  isCompleted
+  todo.isCompleted
     ? circleIconClasses.push("icon-ok-circled2")
     : circleIconClasses.push("icon-circle-thin");
 
@@ -27,13 +31,16 @@ const Todo: React.FC<TodoProps> = ({ name, isCompleted, onClick }) => {
       className={classes.todo}
     >
       <i
-        onClick={() => onClick(isCompleted)}
+        onClick={() => toggleTodo(todo.id)}
         className={circleIconClasses.join(" ")}
       />
-      <p className={classes["todo-name"]}>{name}</p>
+      <p className={classes["todo-name"]}>{todo.name}</p>
 
       {closeIconShown && (
-        <i className={`icon-cancel ${classes["close-icon"]}`} />
+        <i
+          onClick={deleteIconClickHandler}
+          className={`icon-cancel ${classes["close-icon"]}`}
+        />
       )}
     </div>
   );

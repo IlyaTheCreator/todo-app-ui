@@ -7,18 +7,20 @@ import { Todo as TodoType } from "../TodosManager";
 
 interface TodoListProps {
   todos: TodoType[];
+  toggleTodo: (id: string) => void;
+  deleteTodo: (id: string) => void;
 }
 
-const TodoList: React.FC<TodoListProps> = ({ todos }) => {
-  const handleClick = (data: any) => {
-    console.log(data);
-  };
-
+const TodoList: React.FC<TodoListProps> = ({
+  todos,
+  toggleTodo,
+  deleteTodo,
+}) => {
   const todoItems: JSX.Element[] = todos.map((todo: TodoType) => (
     <Todo
-      onClick={handleClick}
-      name={todo.name}
-      isCompleted={todo.isCompleted}
+      deleteTodo={deleteTodo}
+      toggleTodo={toggleTodo}
+      todo={todo}
       key={todo.id}
     />
   ));

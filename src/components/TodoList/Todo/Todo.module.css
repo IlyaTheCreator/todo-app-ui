@@ -21,11 +21,10 @@
 }
 
 .close-icon {
-  font-size: 15px;
+  font-size: 12px;
   margin-right: 10px;
-  color: rgb(136, 136, 136);
 }
 
 .close-icon:hover {
-  color: #000;
+  color: #cc9a9a;
 }

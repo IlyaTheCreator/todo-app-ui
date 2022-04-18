@@ -7,11 +7,16 @@ type Inputs = {
   name: string;
 };
 
-const AddTodo: React.FC = () => {
+interface AddTodoProps {
+  addTodo: (name: string) => void;
+}
+
+const AddTodo: React.FC<AddTodoProps> = ({ addTodo }) => {
   const { register, handleSubmit } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data, e) => {
+    addTodo(data.name);
+    e?.target.reset();
   };
 
   return (
