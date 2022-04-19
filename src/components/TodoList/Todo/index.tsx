@@ -14,7 +14,12 @@ interface TodoProps {
 /**
  * Single todo
  */
-const Todo: React.FC<TodoProps> = ({ todo, toggleTodo, deleteTodo, editTodo }) => {
+const Todo: React.FC<TodoProps> = ({
+  todo,
+  toggleTodo,
+  deleteTodo,
+  editTodo,
+}) => {
   // State for managing whether to show/hide delete icon
   const [closeIconShown, setCloseIconShown] = useState<boolean>(false);
   // State for managing whether to show/hide editing input
@@ -41,11 +46,25 @@ const Todo: React.FC<TodoProps> = ({ todo, toggleTodo, deleteTodo, editTodo }) =
       if (inputRef.current && !inputRef.current.contains(e.target)) {
         editTodo(todo.id, inputRef.current.value);
         setShowInput(false);
+        
         window.removeEventListener("click", listener);
       }
     };
 
     window.addEventListener("click", listener);
+  };
+
+  // Handling input change
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  // Handling Enter key press
+  const keyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      editTodo(todo.id, name);
+      setShowInput(false);
+    }
   };
 
   // Setting what classes to apply to the circle icon
@@ -76,7 +95,9 @@ const Todo: React.FC<TodoProps> = ({ todo, toggleTodo, deleteTodo, editTodo }) =
           ref={inputRef}
           className={classes["todo-input"]}
           type="text"
-          defaultValue={name}
+          value={name}
+          onChange={changeHandler}
+          onKeyDown={keyPressHandler}
         />
       ) : (
         <p className={todoNameClasses.join(" ")}>{todo.name}</p>
