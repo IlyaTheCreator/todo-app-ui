@@ -9,6 +9,9 @@ interface TodoListProps {
   deleteTodo: (id: string) => void;
 }
 
+/**
+ * List of todos
+ */
 const TodoList: React.FC<TodoListProps> = ({
   todos,
   toggleTodo,

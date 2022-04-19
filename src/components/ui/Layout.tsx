@@ -7,6 +7,9 @@ interface LayoutProps {
   children: JSX.Element;
 }
 
+/**
+ * AUX component for setting general layout for the app
+ */
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>

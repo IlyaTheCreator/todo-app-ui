@@ -3,11 +3,13 @@ import { filterNameType } from "../TodosManager";
 
 import classes from "./Filters.module.css";
 
+// Type which describes a single filter button's data
 type filterButton = {
   name: filterNameType;
   text: string;
 };
 
+// List of fitler buttons' data to iterate over later
 const filterButtonsData: filterButton[] = [
   {
     name: "all",
@@ -30,6 +32,9 @@ interface FiltersProps {
   itemsLeftAmount: number;
 }
 
+/**
+ * Todos filters
+ */
 const Filters: React.FC<FiltersProps> = ({
   activeFilterName,
   handleFilterChange,

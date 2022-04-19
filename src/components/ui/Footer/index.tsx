@@ -2,6 +2,9 @@ import React from "react";
 
 import classes from "./Footer.module.css";
 
+/**
+ * Footer UI element
+ */
 const Footer: React.FC = () => {
   return (
     <footer className={classes.footer}>
