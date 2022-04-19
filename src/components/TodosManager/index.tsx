@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "../../axios";
 
 import AddTodo from "../AddTodo";
 import Filters from "../Filters";
@@ -39,6 +40,9 @@ const MOCK_TODOS: Todo[] = [
   },
 ];
 
+const fetchTodos = async () => await axios.get("cards/filter?listId=4");
+
+
 /**
  * Central todos state manager.
  */
@@ -48,6 +52,12 @@ const TodosManager: React.FC = () => {
   // state for deciding what type of filter to apply
   const [activeFilterName, setActiveFilterName] =
     useState<filterNameType>("all");
+
+  useEffect(() => {
+    axios.get("cards/filter?listId=4").then((output) => {
+      setTodos(output.data);
+    });
+  }, [todos]);
 
   /* FUNCTIONS START */
 

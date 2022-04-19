@@ -21,13 +21,16 @@ interface AddTodoProps {
  */
 const AddTodo: React.FC<AddTodoProps> = ({ addTodo, toggleAllTodos }) => {
   // Using useForm() hook to generate functions which will help us to manage form
-  const { register, handleSubmit } = useForm<Inputs>();
+  const { register, handleSubmit, reset } = useForm<Inputs>();
 
   // Form onSubmit handler. The type is from useForm docs
   const onSubmit: SubmitHandler<Inputs> = (data, e) => {
-    addTodo(data.name);
-    // Clearing inputs after submission
-    e?.target.reset();
+    if (data.name.trim().length > 0) {
+      addTodo(data.name);
+      // Clearing inputs after submission
+      e?.target.reset();
+      reset();
+    }
   };
 
   // There's no buttom. Form is submitted by pressing Enter
