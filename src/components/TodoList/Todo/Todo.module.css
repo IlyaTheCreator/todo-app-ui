@@ -4,15 +4,24 @@
   border-bottom: 1px solid #e6e6e6;
   cursor: pointer;
   color: inherit;
+  transition: all 0.2s ease;
 }
 
-.todo-name {
+.todo-name, .todo-input {
   flex-grow: 1;
   word-break: break-all;
   line-height: 1.2;
   transition: color 0.4s;
   font-size: 25px;
   padding: 15px;
+}
+
+.todo-input {
+  margin-left: 50px;
+}
+
+.todo-input:focus {
+  outline: none;
 }
 
 .icon-circle {
@@ -27,4 +36,22 @@
 
 .close-icon:hover {
   color: #cc9a9a;
+}
+
+.todo-completed {
+  animation-name: complete-todo;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes complete-todo {
+  from {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  to {
+    text-decoration: line-through;
+    color: #d9d9d9;;
+  }
 }

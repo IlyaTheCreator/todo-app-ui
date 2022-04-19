@@ -77,6 +77,13 @@ const TodosManager: React.FC = () => {
     setTodos((prev: Todo[]) => prev.filter((todo: Todo) => todo.id !== id));
   };
 
+  // Change todo name
+  const editTodo = (id: string, name: string) => {
+    setTodos((prev: Todo[]) =>
+      prev.map((todo: Todo) => (todo.id === id ? { ...todo, name } : todo))
+    );
+  };
+
   // Managing what happens when one of the filters is clicked
   const handleFilterChange = (filterName: filterNameType) => {
     if (filterName !== activeFilterName) {
@@ -91,7 +98,7 @@ const TodosManager: React.FC = () => {
 
   /**
    * Function for managing onClick event on the arrow icon in the input for adding a todo.
-   * If at least one todo is completed, i.e isCompleted = true, all of them will be set to 
+   * If at least one todo is completed, i.e isCompleted = true, all of them will be set to
    * isCompleted = true, otherwise all of them will be set to isCompleted = false
    */
   const toggleAllTodos = () => {
@@ -139,6 +146,7 @@ const TodosManager: React.FC = () => {
       <TodoList
         deleteTodo={deleteTodo}
         toggleTodo={toggleTodo}
+        editTodo={editTodo}
         todos={todosToDisplay}
       />
       <Filters
