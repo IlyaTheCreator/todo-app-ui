@@ -5,9 +5,9 @@ import classes from "./Todo.module.css";
 
 interface TodoProps {
   todo: TodoType;
-  toggleTodo: (id: string) => void;
-  deleteTodo: (id: string) => void;
-  editTodo: (id: string, name: string) => void;
+  toggleTodo: (id: number) => void;
+  deleteTodo: (id: number) => void;
+  editTodo: (id: number, name: string) => void;
   key: any;
 }
 
