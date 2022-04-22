@@ -1,4 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import cn from 'classnames';
+
 import { Todo as TodoType } from "../../TodosManager";
 
 import classes from "./Todo.module.css";
@@ -27,7 +29,14 @@ const Todo: React.FC<TodoProps> = ({
   // State for managing editing input value
   const [name, setName] = useState<string>(todo.name);
   // Ref for the editing input
-  const inputRef = useRef<any>();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  //Cursor focus on input, when double click
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [showInput]);
 
   // Show delete icon on mouseenter
   const mouseEnterHandler = () => setCloseIconShown(true);
@@ -46,7 +55,7 @@ const Todo: React.FC<TodoProps> = ({
       if (inputRef.current && !inputRef.current.contains(e.target)) {
         editTodo(todo.id, inputRef.current.value);
         setShowInput(false);
-        
+
         window.removeEventListener("click", listener);
       }
     };
@@ -79,16 +88,21 @@ const Todo: React.FC<TodoProps> = ({
 
   return (
     <div
-      onDoubleClick={doubleClickHandler}
-      onMouseEnter={!showInput ? mouseEnterHandler : () => {}}
-      onMouseLeave={!showInput ? mouseLeaveHandler : () => {}}
-      className={classes.todo}
+      onMouseEnter={!showInput ? mouseEnterHandler : () => { }}
+      onMouseLeave={!showInput ? mouseLeaveHandler : () => { }}
+      className={cn(classes.todo, { [classes['todo_edit']]: showInput })}
     >
       {!showInput && (
-        <i
-          onClick={() => toggleTodo(todo.id)}
-          className={circleIconClasses.join(" ")}
-        />
+        <>
+          <input
+            className={classes['check-input']}
+            type="checkbox"
+            id={`checkbox_${todo.id}`}
+            checked={todo.isCompleted}
+            onChange={() => toggleTodo(todo.id)}
+          />
+          <label htmlFor={`checkbox_${todo.id}`} className={classes.box} />
+        </>
       )}
       {showInput ? (
         <input
@@ -100,7 +114,9 @@ const Todo: React.FC<TodoProps> = ({
           onKeyDown={keyPressHandler}
         />
       ) : (
-        <p className={todoNameClasses.join(" ")}>{todo.name}</p>
+        <p className={todoNameClasses.join(" ")}
+          onDoubleClick={doubleClickHandler}
+        >{todo.name}</p>
       )}
       {closeIconShown && !showInput && (
         <i

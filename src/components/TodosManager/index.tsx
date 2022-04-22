@@ -107,12 +107,15 @@ const TodosManager: React.FC = () => {
         editTodo={editTodo}
         todos={todosToDisplay}
       />
-      <Filters
-        handleFilterChange={handleFilterChange}
-        activeFilterName={activeFilterName}
-        clearCompletedTodos={clearCompletedTodos}
-        itemsLeftAmount={itemsLeftAmount}
-      />
+      {todos.length
+        ? <Filters
+          handleFilterChange={handleFilterChange}
+          activeFilterName={activeFilterName}
+          clearCompletedTodos={clearCompletedTodos}
+          itemsLeftAmount={itemsLeftAmount}
+        />
+        : null
+      }
     </main>
   );
 };

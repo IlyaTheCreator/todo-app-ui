@@ -4,10 +4,23 @@
   border-bottom: 1px solid #e6e6e6;
   cursor: pointer;
   color: inherit;
-  transition: all 0.2s ease;
 }
 
-.todo-name, .todo-input {
+.todo:last-child {
+  border-bottom: none;
+}
+
+.todo_edit {
+  margin-bottom: -1px;
+}
+
+.todo_edit {
+  border-bottom: none;
+  padding: 0;
+}
+
+.todo-name,
+.todo-input {
   flex-grow: 1;
   word-break: break-all;
   line-height: 1.2;
@@ -16,8 +29,15 @@
   padding: 15px;
 }
 
+.todo-name {
+  margin-left: 40px;
+}
+
 .todo-input {
   margin-left: 50px;
+  box-shadow: inset 0 -1px 5px 0 rgb(0 0 0 / 20%);
+  outline: none;
+  border: 1px solid #999;
 }
 
 .todo-input:focus {
@@ -44,6 +64,23 @@
   animation-fill-mode: forwards;
 }
 
+.check-input {
+  appearance: none;
+}
+
+.box {
+  position: absolute;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23ededed%22%20stroke-width%3D%223%22/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+}
+
+.check-input:checked+.box {
+  background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23bddad5%22%20stroke-width%3D%223%22/%3E%3Cpath%20fill%3D%22%235dc2af%22%20d%3D%22M72%2025L42%2071%2027%2056l-4%204%2020%2020%2034-52z%22/%3E%3C/svg%3E');
+}
+
 @keyframes complete-todo {
   from {
     text-decoration: none;
@@ -52,6 +89,7 @@
 
   to {
     text-decoration: line-through;
-    color: #d9d9d9;;
+    color: #d9d9d9;
+    ;
   }
 }

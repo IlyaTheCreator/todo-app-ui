@@ -4,6 +4,33 @@
   align-items: center;
   padding: 10px 20px;
   color: inherit;
+  border-top: 1px solid #e6e6e6
+}
+
+.filters::before {
+  content: "";
+  position: absolute;
+  border: 1px solid #e6e6e6;
+  height: 100%;
+  width: calc(100% - 6px);
+  left: 3px;
+  bottom: -6px;
+  z-index: -1;
+  background: #fff;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%);
+}
+
+.filters::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  border: 1px solid #e6e6e6;
+  width: calc(100% - 16px);
+  left: 8px;
+  bottom: -10px;
+  z-index: -2;
+  background: #fff;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%);
 }
 
 .filter-btn {
