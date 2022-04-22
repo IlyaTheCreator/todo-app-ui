@@ -76,16 +76,6 @@ const Todo: React.FC<TodoProps> = ({
     }
   };
 
-  // Setting what classes to apply to the circle icon
-  const circleIconClasses = [classes["icon-circle"]];
-  todo.isCompleted
-    ? circleIconClasses.push("icon-ok-circled2")
-    : circleIconClasses.push("icon-circle-thin");
-
-  // Setting what classes to apply to todo name
-  const todoNameClasses = [classes["todo-name"]];
-  todo.isCompleted && todoNameClasses.push(classes["todo-completed"]);
-
   return (
     <div
       onMouseEnter={!showInput ? mouseEnterHandler : () => { }}
@@ -114,7 +104,7 @@ const Todo: React.FC<TodoProps> = ({
           onKeyDown={keyPressHandler}
         />
       ) : (
-        <p className={todoNameClasses.join(" ")}
+        <p className={cn(classes["todo-name"], { [classes["todo-completed"]]: todo.isCompleted })}
           onDoubleClick={doubleClickHandler}
         >{todo.name}</p>
       )}

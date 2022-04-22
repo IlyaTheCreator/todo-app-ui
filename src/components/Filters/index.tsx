@@ -1,4 +1,6 @@
 import React from "react";
+import cn from 'classnames';
+
 import { filterNameType } from "../TodosManager";
 
 import classes from "./Filters.module.css";
@@ -42,15 +44,11 @@ const Filters: React.FC<FiltersProps> = ({
   itemsLeftAmount,
 }) => {
   const filterButtons = filterButtonsData.map((btn: filterButton) => {
-    const classList = [classes["filter-btn"]];
-    activeFilterName === btn.name &&
-      classList.push(classes["active-filter-btn"]);
-
     return (
       <button
         key={btn.name}
         onClick={() => handleFilterChange(btn.name)}
-        className={classList.join(" ")}
+        className={cn(classes['filter-btn'], { [classes["active-filter-btn"]]: activeFilterName === btn.name })}
       >
         {btn.text}
       </button>

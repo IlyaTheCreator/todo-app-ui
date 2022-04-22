@@ -1,46 +1,53 @@
 import { AxiosResponse } from "axios";
 import axios from "../axios";
 
-export default class APILayer {
-  static async fetchTodos(): Promise<AxiosResponse> {
-    return await axios.get("cards/filter?listId=4");
+class APILayer {
+  constructor(public currentListId?: string) {
+
   }
 
-  static async toggleIsCompleted(id: number): Promise<AxiosResponse> {
+  async fetchTodos(listId?: string): Promise<AxiosResponse> {
+    this.currentListId = listId || this.currentListId;
+    return await axios.get(`cards/filter?listId=${this.currentListId}`);
+  }
+
+  async toggleIsCompleted(id: number): Promise<AxiosResponse> {
     await axios.put(`cards/complete/${id}`);
-    return await APILayer.fetchTodos();
+    return await this.fetchTodos();
   }
 
-  static async addNewTodo(
+  async addNewTodo(
     name: string,
     listId: number
   ): Promise<AxiosResponse> {
     await axios.post("cards", { name, listId });
-    return await APILayer.fetchTodos();
+    return await this.fetchTodos();
   }
 
-  static async deleteExistingTodo(id: number): Promise<AxiosResponse> {
+  async deleteExistingTodo(id: number): Promise<AxiosResponse> {
     await axios.delete(`cards/${id}`);
-    return await APILayer.fetchTodos();
+    return await this.fetchTodos();
   }
 
-  static async updateTodoName(
+  async updateTodoName(
     id: number,
     name: string
   ): Promise<AxiosResponse> {
     await axios.put(`cards/${id}`, { name });
-    return await APILayer.fetchTodos();
+    return await this.fetchTodos();
   }
 
-  static async deleteCompletedTodos(): Promise<AxiosResponse> {
+  async deleteCompletedTodos(): Promise<AxiosResponse> {
     await axios.delete("cards/complete/all");
-    return await APILayer.fetchTodos();
+    return await this.fetchTodos();
   }
 
-  static async toggleGlobalIsCompleted(
+  async toggleGlobalIsCompleted(
     isCompletedValue: boolean
   ): Promise<AxiosResponse> {
     await axios.put(`cards/complete/all/${isCompletedValue}`);
-    return await APILayer.fetchTodos();
+    return await this.fetchTodos();
   }
-}
+};
+
+export default new APILayer();
