@@ -4,4 +4,10 @@
   color: #4d4d4d;
   font-weight: 300;
   box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 25px 50px 0 rgb(0 0 0 / 10%);
+  padding: 0 0 10px 0;
+}
+
+.empty {
+  text-align: center;
+  margin: 20px 0 5px 0;
 }

@@ -11,6 +11,9 @@ interface ILists {
   updateName: (id: number, name: string) => void;
 }
 
+/**
+ * Lists of lists
+ */
 const Lists: React.FC<ILists> = ({ lists, deleteList, updateName }) => {
   return <div className={classes.lists}>
     {lists.map((list: IList) => {

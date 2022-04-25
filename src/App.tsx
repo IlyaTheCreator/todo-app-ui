@@ -10,14 +10,14 @@ import ListManager from './components/ListManager';
  */
 const App: React.FC = () => {
   return (
-    <Layout>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Layout>
         <Routes>
           <Route path='/' element={<ListManager />} />
           <Route path={'/lists/:id'} element={<TodosManager />} />
         </Routes>
-      </BrowserRouter>
-    </Layout>
+      </Layout>
+    </BrowserRouter>
   );
 }
 
