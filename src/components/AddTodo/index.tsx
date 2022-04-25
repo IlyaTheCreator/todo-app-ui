@@ -1,7 +1,9 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import { TodosManagesParams } from "../TodosManager";
 
-import classes from "./AddTodo.module.css";
+import classes from "./AddTodo.module.scss";
 
 /**
  * Type required by useForm. It uses it to give us appropriate functions from 
@@ -12,7 +14,7 @@ type Inputs = {
 };
 
 interface AddTodoProps {
-  addTodo: (name: string) => void;
+  addTodo: (name: string, listId?: string) => void;
   toggleAllTodos: () => void;
 }
 
@@ -22,11 +24,12 @@ interface AddTodoProps {
 const AddTodo: React.FC<AddTodoProps> = ({ addTodo, toggleAllTodos }) => {
   // Using useForm() hook to generate functions which will help us to manage form
   const { register, handleSubmit, reset } = useForm<Inputs>();
+  const params = useParams<TodosManagesParams>();
 
   // Form onSubmit handler. The type is from useForm docs
   const onSubmit: SubmitHandler<Inputs> = (data, e) => {
     if (data.name.trim().length > 0) {
-      addTodo(data.name);
+      addTodo(data.name, params.id);
       // Clearing inputs after submission
       e?.target.reset();
       reset();

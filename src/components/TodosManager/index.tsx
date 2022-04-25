@@ -6,8 +6,8 @@ import TodoList from "../TodoList";
 
 import APILayer from "../../api";
 
-import classes from "./TodosManager.module.css";
 import { useParams } from "react-router-dom";
+import classes from "./TodosManager.module.scss";
 
 // Todo entity type
 export type Todo = {
@@ -19,7 +19,7 @@ export type Todo = {
 // Union for typing filter state (bar at the bottom of the list of todos)
 export type filterNameType = "all" | "active" | "completed";
 
-type TodosManagesParams = {
+export type TodosManagesParams = {
   id: string;
 };
 /**
@@ -33,10 +33,10 @@ const TodosManager: React.FC = () => {
     useState<filterNameType>("all");
 
   const params = useParams<TodosManagesParams>();
-  console.log(params.id)
+
   useEffect(() => {
     APILayer.fetchTodos(params.id).then((output) => setTodos(output.data));
-  }, []);
+  }, [params.id]);
 
   /* FUNCTIONS START */
 
@@ -46,8 +46,8 @@ const TodosManager: React.FC = () => {
   };
 
   // Create a new todo
-  const addTodo = (name: string) => {
-    APILayer.addNewTodo(name, 4).then((output) => setTodos(output.data));
+  const addTodo = (name: string, listId: string = '1') => {
+    APILayer.addNewTodo(name, Number(listId)).then((output) => setTodos(output.data));
   };
 
   // Remove a todo from list

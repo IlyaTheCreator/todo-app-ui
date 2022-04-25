@@ -4,45 +4,38 @@
   border-bottom: 1px solid #e6e6e6;
   cursor: pointer;
   color: inherit;
-}
 
-.todo:last-child {
-  border-bottom: none;
-}
+  &:last-child {
+    border-bottom: none;
+  }
 
-.todo_edit {
-  margin-bottom: -1px;
-}
+  &_edit {
+    border-bottom: none;
+    padding: 0;
+  }
 
-.todo_edit {
-  border-bottom: none;
-  padding: 0;
-}
+  &-name,
+  &-input {
+    flex-grow: 1;
+    word-break: break-all;
+    line-height: 1.2;
+    transition: color 0.4s;
+    font-size: 25px;
+    padding: 15px;
+  }
 
-.todo-name,
-.todo-input {
-  flex-grow: 1;
-  word-break: break-all;
-  line-height: 1.2;
-  transition: color 0.4s;
-  font-size: 25px;
-  padding: 15px;
-}
+  &-name {
+    margin-left: 40px;
+    transition: color 0.4s;
+  }
 
-.todo-name {
-  margin-left: 40px;
-  transition: color 0.4s;
-}
+  &-input {
+    margin-left: 50px;
 
-.todo-input {
-  margin-left: 50px;
-  box-shadow: inset 0 -1px 5px 0 rgb(0 0 0 / 20%);
-  outline: none;
-  border: 1px solid #999;
-}
-
-.todo-input:focus {
-  outline: none;
+    &:focus {
+      outline: none;
+    }
+  }
 }
 
 .icon-circle {
@@ -51,12 +44,14 @@
 }
 
 .close-icon {
+  position: absolute;
+  right: 0;
   font-size: 12px;
   margin-right: 10px;
-}
 
-.close-icon:hover {
-  color: #cc9a9a;
+  &:hover {
+    color: #cc9a9a;
+  }
 }
 
 .todo-completed {

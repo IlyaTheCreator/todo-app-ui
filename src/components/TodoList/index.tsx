@@ -3,6 +3,8 @@ import Todo from "./Todo";
 
 import { Todo as TodoType } from "../TodosManager";
 
+import classes from './index.module.css';
+
 interface TodoListProps {
   todos: TodoType[];
   toggleTodo: (id: number) => void;
@@ -29,7 +31,7 @@ const TodoList: React.FC<TodoListProps> = ({
     />
   ));
 
-  return <ul>{todoItems}</ul>;
+  return <ul className={classes['todo-list']}>{todoItems}</ul>;
 };
 
 export default TodoList;

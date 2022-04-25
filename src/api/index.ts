@@ -6,6 +6,31 @@ class APILayer {
 
   }
 
+  async fetchLists(): Promise<AxiosResponse> {
+    return await axios.get('lists');
+  }
+
+  async addList(name: string): Promise<AxiosResponse> {
+    await axios.post('lists', { name });
+
+    return await this.fetchLists();
+  }
+
+  async deleteList(id: number): Promise<AxiosResponse> {
+    await axios.delete('lists/' + id);
+
+    return await this.fetchLists();
+  }
+
+  async updateListName(
+    id: number,
+    name: string
+  ): Promise<AxiosResponse> {
+    await axios.put(`lists/${id}`, { name });
+    return await this.fetchLists();
+  }
+
+
   async fetchTodos(listId?: string): Promise<AxiosResponse> {
     this.currentListId = listId || this.currentListId;
     return await axios.get(`cards/filter?listId=${this.currentListId}`);
