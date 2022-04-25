@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import cn from 'classnames';
 import { Link } from "react-router-dom";
 
-import classes from './index.module.css';
+import classes from './index.module.scss';
 
 interface IListItem {
   id: number,

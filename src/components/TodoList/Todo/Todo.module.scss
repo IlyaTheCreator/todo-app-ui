@@ -4,41 +4,37 @@
   border-bottom: 1px solid #e6e6e6;
   cursor: pointer;
   color: inherit;
-}
 
-.todo:last-child {
-  border-bottom: none;
-}
+  &:last-child {
+    border-bottom: none;
+  }
 
-.todo_edit {
-  margin-bottom: -1px;
-}
+  &_edit {
+    border-bottom: none;
+    padding: 0;
+  }
 
-.todo_edit {
-  border-bottom: none;
-  padding: 0;
-}
+  &-name,
+  &-input {
+    flex-grow: 1;
+    word-break: break-all;
+    line-height: 1.2;
+    transition: color 0.4s;
+    font-size: 25px;
+    padding: 15px;
+  }
 
-.todo-name,
-.todo-input {
-  flex-grow: 1;
-  word-break: break-all;
-  line-height: 1.2;
-  transition: color 0.4s;
-  font-size: 25px;
-  padding: 15px;
-}
+  &-name {
+    margin-left: 40px;
+    transition: color 0.4s;
+  }
 
-.todo-name {
-  margin-left: 40px;
-  transition: color 0.4s;
-}
+  &-input {
+    margin-left: 50px;
 
-.todo-input {
-  margin-left: 50px;
-
-  &:focus {
-    outline: none;
+    &:focus {
+      outline: none;
+    }
   }
 }
 

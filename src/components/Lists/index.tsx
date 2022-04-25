@@ -3,7 +3,7 @@ import React from "react";
 import { IList } from "../ListManager";
 import ListItem from "./ListItem";
 
-import classes from './index.module.css';
+import classes from './index.module.scss';
 
 interface ILists {
   lists: IList[],
