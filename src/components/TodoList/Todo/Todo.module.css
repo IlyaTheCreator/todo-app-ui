@@ -51,6 +51,8 @@
 }
 
 .close-icon {
+  position: absolute;
+  right: 0;
   font-size: 12px;
   margin-right: 10px;
 }

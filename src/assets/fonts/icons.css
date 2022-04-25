@@ -2,13 +2,14 @@
   font-family: 'fontello';
   src: url('./icon-font/fontello.eot?53091122');
   src: url('./icon-font/fontello.eot?53091122#iefix') format('embedded-opentype'),
-       url('./icon-font/fontello.woff2?53091122') format('woff2'),
-       url('./icon-font/fontello.woff?53091122') format('woff'),
-       url('./icon-font/fontello.ttf?53091122') format('truetype'),
-       url('./icon-font/fontello.svg?53091122#fontello') format('svg');
+    url('./icon-font/fontello.woff2?53091122') format('woff2'),
+    url('./icon-font/fontello.woff?53091122') format('woff'),
+    url('./icon-font/fontello.ttf?53091122') format('truetype'),
+    url('./icon-font/fontello.svg?53091122#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
+
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
 /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
 /*
@@ -19,7 +20,8 @@
   }
 }
 */
-[class^="icon-"]:before, [class*=" icon-"]:before {
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
   font-family: "fontello";
   font-style: normal;
   font-weight: normal;
@@ -54,7 +56,64 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-.icon-ok-circled2:before { content: '\e800'; } /* '' */
-.icon-cancel:before { content: '\e801'; } /* '' */
-.icon-down-open:before { content: '\f004'; } /* '' */
-.icon-circle-thin:before { content: '\f1db'; } /* '' */
+.icon-ok-circled2:before {
+  content: '\e800';
+}
+
+/* '' */
+.icon-cancel:before {
+  content: '\e801';
+}
+
+/* '' */
+.icon-down-open:before {
+  content: '\f004';
+}
+
+/* '' */
+.icon-circle-thin:before {
+  content: '\f1db';
+}
+
+/* '' */
+
+
+@font-face {
+  font-family: 'icomoon';
+  src: url('./icomoon/icomoon.eot?xp4xt7');
+  src: url('./icomoon/icomoon.eot?xp4xt7#iefix') format('embedded-opentype'),
+    url('./icomoon/icomoon.ttf?xp4xt7') format('truetype'),
+    url('./icomoon/icomoon.woff?xp4xt7') format('woff'),
+    url('./icomoon/icomoon.svg?xp4xt7#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="ico-"],
+[class*=" ico-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ico-trash:before {
+  content: "\e900";
+}
+
+.ico-edit:before {
+  content: "\e901";
+}
+
+.ico-check:before {
+  content: "\e902";
+}
