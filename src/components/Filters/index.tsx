@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import { filterNameType } from "../TodosManager";
 
-import classes from "./Filters.module.css";
+import classes from "./Filters.module.scss";
 
 // Type which describes a single filter button's data
 type filterButton = {

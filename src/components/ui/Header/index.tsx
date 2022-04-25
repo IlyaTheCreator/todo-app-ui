@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import classes from "./Header.module.css";
+import classes from "./Header.module.scss";
 
 /**
  * Header UI element
