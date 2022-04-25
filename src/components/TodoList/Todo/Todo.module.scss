@@ -18,10 +18,10 @@
 
 .todo-input {
   margin-left: 50px;
-}
 
-.todo-input:focus {
-  outline: none;
+  &:focus {
+    outline: none;
+  }
 }
 
 .icon-circle {
@@ -32,10 +32,10 @@
 .close-icon {
   font-size: 12px;
   margin-right: 10px;
-}
 
-.close-icon:hover {
-  color: #cc9a9a;
+  &:hover {
+    color: #cc9a9a;
+  }
 }
 
 .todo-completed {

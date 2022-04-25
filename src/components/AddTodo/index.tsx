@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import classes from "./AddTodo.module.css";
+import classes from "./AddTodo.module.scss";
 
 /**
  * Type required by useForm. It uses it to give us appropriate functions from 

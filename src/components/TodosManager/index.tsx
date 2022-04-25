@@ -6,7 +6,7 @@ import TodoList from "../TodoList";
 
 import APILayer from "../../api";
 
-import classes from "./TodosManager.module.css";
+import classes from "./TodosManager.module.scss";
 
 // Todo entity type
 export type Todo = {

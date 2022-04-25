@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Todo as TodoType } from "../../TodosManager";
 
-import classes from "./Todo.module.css";
+import classes from "./Todo.module.scss";
 
 interface TodoProps {
   todo: TodoType;
