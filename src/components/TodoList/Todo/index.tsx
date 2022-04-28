@@ -1,12 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from 'react';
 import cn from 'classnames';
 
-import { Todo as TodoType } from "../../TodosManager";
+import { ITodo } from '../../../types';
 
-import classes from "./Todo.module.scss";
+import classes from './Todo.module.scss';
 
 interface TodoProps {
-  todo: TodoType;
+  todo: ITodo;
   toggleTodo: (id: number) => void;
   deleteTodo: (id: number) => void;
   editTodo: (id: number, name: string) => void;
@@ -56,11 +56,11 @@ const Todo: React.FC<TodoProps> = ({
         editTodo(todo.id, inputRef.current.value);
         setShowInput(false);
 
-        window.removeEventListener("click", listener);
+        window.removeEventListener('click', listener);
       }
     };
 
-    window.addEventListener("click", listener);
+    window.addEventListener('click', listener);
   };
 
   // Handling input change
@@ -70,7 +70,7 @@ const Todo: React.FC<TodoProps> = ({
 
   // Handling Enter key press
   const keyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       editTodo(todo.id, name);
       setShowInput(false);
     }
@@ -78,8 +78,8 @@ const Todo: React.FC<TodoProps> = ({
 
   return (
     <div
-      onMouseEnter={!showInput ? mouseEnterHandler : () => { }}
-      onMouseLeave={!showInput ? mouseLeaveHandler : () => { }}
+      onMouseEnter={!showInput ? mouseEnterHandler : () => {}}
+      onMouseLeave={!showInput ? mouseLeaveHandler : () => {}}
       className={cn(classes.todo, { [classes['todo_edit']]: showInput })}
     >
       {!showInput && (
@@ -97,21 +97,26 @@ const Todo: React.FC<TodoProps> = ({
       {showInput ? (
         <input
           ref={inputRef}
-          className={classes["todo-input"]}
+          className={classes['todo-input']}
           type="text"
           value={name}
           onChange={changeHandler}
           onKeyDown={keyPressHandler}
         />
       ) : (
-        <p className={cn(classes["todo-name"], { [classes["todo-completed"]]: todo.isCompleted })}
+        <p
+          className={cn(classes['todo-name'], {
+            [classes['todo-completed']]: todo.isCompleted,
+          })}
           onDoubleClick={doubleClickHandler}
-        >{todo.name}</p>
+        >
+          {todo.name}
+        </p>
       )}
       {closeIconShown && !showInput && (
         <i
           onClick={deleteIconClickHandler}
-          className={`icon-cancel ${classes["close-icon"]}`}
+          className={`icon-cancel ${classes['close-icon']}`}
         />
       )}
     </div>

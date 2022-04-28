@@ -1,12 +1,12 @@
-import React from "react";
-import Todo from "./Todo";
+import React from 'react';
+import Todo from './Todo';
 
-import { Todo as TodoType } from "../TodosManager";
+import { ITodo } from '../../types';
 
 import classes from './index.module.css';
 
 interface TodoListProps {
-  todos: TodoType[];
+  todos: ITodo[];
   toggleTodo: (id: number) => void;
   deleteTodo: (id: number) => void;
   editTodo: (id: number, name: string) => void;
@@ -19,9 +19,9 @@ const TodoList: React.FC<TodoListProps> = ({
   todos,
   toggleTodo,
   deleteTodo,
-  editTodo
+  editTodo,
 }) => {
-  const todoItems: JSX.Element[] = todos.map((todo: TodoType) => (
+  const todoItems: JSX.Element[] = todos.map((todo: ITodo) => (
     <Todo
       deleteTodo={deleteTodo}
       toggleTodo={toggleTodo}

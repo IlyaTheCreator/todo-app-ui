@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 import cn from 'classnames';
 
-import { filterNameType } from "../TodosManager";
+import { filterNameType } from '../../types';
 
-import classes from "./Filters.module.scss";
+import classes from './Filters.module.scss';
 
 // Type which describes a single filter button's data
 type filterButton = {
@@ -14,16 +14,16 @@ type filterButton = {
 // List of fitler buttons' data to iterate over later
 const filterButtonsData: filterButton[] = [
   {
-    name: "all",
-    text: "All",
+    name: 'all',
+    text: 'All',
   },
   {
-    name: "active",
-    text: "Active",
+    name: 'active',
+    text: 'Active',
   },
   {
-    name: "completed",
-    text: "Completed",
+    name: 'completed',
+    text: 'Completed',
   },
 ];
 
@@ -48,7 +48,9 @@ const Filters: React.FC<FiltersProps> = ({
       <button
         key={btn.name}
         onClick={() => handleFilterChange(btn.name)}
-        className={cn(classes['filter-btn'], { [classes["active-filter-btn"]]: activeFilterName === btn.name })}
+        className={cn(classes['filter-btn'], {
+          [classes['active-filter-btn']]: activeFilterName === btn.name,
+        })}
       >
         {btn.text}
       </button>
@@ -58,12 +60,12 @@ const Filters: React.FC<FiltersProps> = ({
   return (
     <div className={classes.filters}>
       <p>
-        {itemsLeftAmount} item{itemsLeftAmount !== 1 && "s"} left
+        {itemsLeftAmount} item{itemsLeftAmount !== 1 && 's'} left
       </p>
       <div>{filterButtons}</div>
       <button
         onClick={clearCompletedTodos}
-        className={`${classes["filter-btn"]} ${classes["clear-completed-btn"]}`}
+        className={`${classes['filter-btn']} ${classes['clear-completed-btn']}`}
       >
         Clear completed
       </button>

@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import classes from "./Header.module.scss";
+import classes from './Header.module.scss';
 
 /**
  * Header UI element
@@ -9,9 +9,11 @@ import classes from "./Header.module.scss";
 const Header: React.FC = () => {
   return (
     <header>
-      <Link to='/' className={classes.link}>
-        <h1 className={classes.title}>todos</h1>
-      </Link>
+      <div className="container">
+        <Link to="/" className={classes.link}>
+          <h1 className={classes.title}>todos</h1>
+        </Link>
+      </div>
     </header>
   );
 };
