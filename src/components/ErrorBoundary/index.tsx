@@ -6,7 +6,7 @@ import classes from './ErrorBoundary.module.scss';
 
 interface IErrorBoundaryProps {
   children: React.ReactNode;
-  error: boolean;
+  error?: boolean;
 }
 
 interface IErrorBoundaryState {

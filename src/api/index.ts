@@ -38,7 +38,7 @@ class APILayer {
     this.currentListId = listId || this.currentListId;
 
     return await axios.get<ITodo[]>(
-      `cards/filter?listId=${this.currentListId}`,
+      `carsds/filter?listId=${this.currentListId}`,
     );
   }
 
