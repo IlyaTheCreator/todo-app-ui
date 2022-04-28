@@ -4,11 +4,11 @@
   align-items: center;
   padding: 10px 20px;
   color: inherit;
-  border-top: 1px solid #e6e6e6
+  border-top: 1px solid #e6e6e6;
 }
 
 .filters::before {
-  content: "";
+  content: '';
   position: absolute;
   border: 1px solid #e6e6e6;
   height: 100%;
@@ -21,7 +21,7 @@
 }
 
 .filters::after {
-  content: "";
+  content: '';
   position: absolute;
   height: 100%;
   border: 1px solid #e6e6e6;

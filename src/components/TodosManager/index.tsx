@@ -1,68 +1,85 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import AddTodo from "../AddTodo";
-import Filters from "../Filters";
-import TodoList from "../TodoList";
+import { useParams } from 'react-router-dom';
 
-import APILayer from "../../api";
+import AddTodo from '../AddTodo';
+import Filters from '../Filters';
+import TodoList from '../TodoList';
 
-import { useParams } from "react-router-dom";
-import classes from "./TodosManager.module.scss";
+import APILayer from '../../api';
 
-// Todo entity type
-export type Todo = {
-  id: number;
-  name: string;
-  isCompleted: boolean;
-};
+import classes from './TodosManager.module.scss';
 
-// Union for typing filter state (bar at the bottom of the list of todos)
-export type filterNameType = "all" | "active" | "completed";
+import { filterNameType, ITodo } from '../../types';
+import ErrorBoundary from '../ErrorBoundary';
 
 export type TodosManagesParams = {
   id: string;
 };
+
 /**
  * Central todos state manager.
  */
 const TodosManager: React.FC = () => {
   // todos state
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<ITodo[]>([]);
   // state for deciding what type of filter to apply
   const [activeFilterName, setActiveFilterName] =
-    useState<filterNameType>("all");
+    useState<filterNameType>('all');
+
+  // initial error boundary error state
+  const [error, setError] = useState<boolean>(false);
 
   const params = useParams<TodosManagesParams>();
 
-  useEffect(() => {
-    APILayer.fetchTodos(params.id).then((output) => setTodos(output.data));
-  }, [params.id]);
-
   /* FUNCTIONS START */
+  const setTodosOrCatchErrors = (data: ITodo[]) => {
+    if (Array.isArray(data)) {
+      setTodos(data);
+    } else {
+      setError(true);
+    }
+  };
+
+  useEffect(() => {
+    APILayer.fetchTodos(params.id).then(output =>
+      setTodosOrCatchErrors(output.data),
+    );
+  }, [params.id]);
 
   // Complete/undo a todo
   const toggleTodo = (id: number) => {
-    APILayer.toggleIsCompleted(id).then((output) => setTodos(output.data));
+    APILayer.toggleIsCompleted(id).then(output =>
+      setTodosOrCatchErrors(output.data),
+    );
   };
 
   // Create a new todo
   const addTodo = (name: string, listId: string = '1') => {
-    APILayer.addNewTodo(name, Number(listId)).then((output) => setTodos(output.data));
+    APILayer.addNewTodo(name, Number(listId)).then(output =>
+      setTodosOrCatchErrors(output.data),
+    );
   };
 
   // Remove a todo from list
   const deleteTodo = (id: number) => {
-    APILayer.deleteExistingTodo(id).then((output) => setTodos(output.data));
+    APILayer.deleteExistingTodo(id).then(output =>
+      setTodosOrCatchErrors(output.data),
+    );
   };
 
   // Change todo name
   const editTodo = (id: number, name: string) => {
-    APILayer.updateTodoName(id, name).then((output) => setTodos(output.data));
+    APILayer.updateTodoName(id, name).then(output =>
+      setTodosOrCatchErrors(output.data),
+    );
   };
 
   // Remove all completed todos
   const clearCompletedTodos = () => {
-    APILayer.deleteCompletedTodos().then((output) => setTodos(output.data));
+    APILayer.deleteCompletedTodos().then(output =>
+      setTodosOrCatchErrors(output.data),
+    );
   };
 
   /**
@@ -71,9 +88,11 @@ const TodosManager: React.FC = () => {
    * isCompleted = true, otherwise all of them will be set to isCompleted = false
    */
   const toggleAllTodos = () => {
-    const todoCheck = todos.find((todo: Todo) => !todo.isCompleted);
+    const todoCheck = todos.find((todo: ITodo) => !todo.isCompleted);
 
-    APILayer.toggleGlobalIsCompleted(Boolean(todoCheck)).then((output) => setTodos(output.data));
+    APILayer.toggleGlobalIsCompleted(Boolean(todoCheck)).then(output =>
+      setTodosOrCatchErrors(output.data),
+    );
   };
 
   // Managing what happens when one of the filters is clicked
@@ -86,17 +105,17 @@ const TodosManager: React.FC = () => {
   /* FUNCTIONS END */
 
   // Variable definitions for producing final output
-  const completedTodos = todos.filter((todo: Todo) => todo.isCompleted);
-  const activeTodos = todos.filter((todo: Todo) => !todo.isCompleted);
-  let itemsLeftAmount: number = activeTodos.length;
-  let todosToDisplay: Todo[];
+  const completedTodos = todos.filter((todo: ITodo) => todo.isCompleted);
+  const activeTodos = todos.filter((todo: ITodo) => !todo.isCompleted);
+  const itemsLeftAmount = activeTodos.length;
+  let todosToDisplay: ITodo[];
 
   // Based on selected filter name, we display different parts of todos state
   switch (activeFilterName) {
-    case "active":
+    case 'active':
       todosToDisplay = activeTodos;
       break;
-    case "completed":
+    case 'completed':
       todosToDisplay = completedTodos;
       break;
     default:
@@ -105,23 +124,24 @@ const TodosManager: React.FC = () => {
   }
 
   return (
-    <main className={classes["todos-manager"]}>
-      <AddTodo toggleAllTodos={toggleAllTodos} addTodo={addTodo} />
-      <TodoList
-        deleteTodo={deleteTodo}
-        toggleTodo={toggleTodo}
-        editTodo={editTodo}
-        todos={todosToDisplay}
-      />
-      {todos.length
-        ? <Filters
-          handleFilterChange={handleFilterChange}
-          activeFilterName={activeFilterName}
-          clearCompletedTodos={clearCompletedTodos}
-          itemsLeftAmount={itemsLeftAmount}
+    <main className={classes['todos-manager']}>
+      <ErrorBoundary error={error}>
+        <AddTodo toggleAllTodos={toggleAllTodos} addTodo={addTodo} />
+        <TodoList
+          deleteTodo={deleteTodo}
+          toggleTodo={toggleTodo}
+          editTodo={editTodo}
+          todos={todosToDisplay}
         />
-        : null
-      }
+        {todos.length ? (
+          <Filters
+            handleFilterChange={handleFilterChange}
+            activeFilterName={activeFilterName}
+            clearCompletedTodos={clearCompletedTodos}
+            itemsLeftAmount={itemsLeftAmount}
+          />
+        ) : null}
+      </ErrorBoundary>
     </main>
   );
 };

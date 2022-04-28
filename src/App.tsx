@@ -6,19 +6,19 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ListManager from './components/ListManager';
 
 /**
- * App's root component 
+ * App's root component
  */
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path='/' element={<ListManager />} />
+          <Route path="/" element={<ListManager />} />
           <Route path={'/lists/:id'} element={<TodosManager />} />
         </Routes>
       </Layout>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

@@ -12,7 +12,7 @@
   box-shadow: 0px 1px 4px 1px #0b101433;
   -webkit-box-shadow: 0px 1px 4px 1px #0b101433;
   -moz-box-shadow: 0px 1px 4px 1px #0b101433;
-  animation: animate-appearance .2s ease;
+  animation: animate-appearance 0.2s ease;
   animation-iteration-count: 1;
 
   a {
@@ -46,7 +46,7 @@
   &__confirm {
     cursor: pointer;
     font-size: 20px;
-    transition: all .2s ease;
+    transition: all 0.2s ease;
 
     &:hover {
       color: #4d4d4dc9;
@@ -54,7 +54,7 @@
 
     &:active {
       color: #292929c9;
-      transform: scale(.9);
+      transform: scale(0.9);
     }
   }
 
@@ -79,10 +79,9 @@
       /* font-size: 22px; */
       /* color: #000; */
       cursor: pointer;
-      transition: color .2s ease;
+      transition: color 0.2s ease;
       margin-right: 7px;
     }
-
   }
 
   .btn {
@@ -94,22 +93,22 @@
     cursor: pointer;
     color: #f7f8ff;
     font-size: 16px;
-    transition: all .2s ease;
+    transition: all 0.2s ease;
 
     &:active {
       border-radius: 6px;
       transform: translate(0px, -1px);
-      transform: scale(.98);
+      transform: scale(0.98);
     }
 
     &:hover {
       border-radius: 9px;
-      background-color: #393B4C;
+      background-color: #393b4c;
     }
 
     span {
       font-weight: 600;
-      letter-spacing: .05em;
+      letter-spacing: 0.05em;
       user-select: none;
     }
   }
