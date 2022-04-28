@@ -33,7 +33,7 @@ class ErrorBoundary extends React.Component<
   }
 
   public componentDidMount() {
-    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+    // document.getElementsByTagName('body')[0].style.overflow = 'hidden';
   }
 
   public render() {

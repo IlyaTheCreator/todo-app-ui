@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
+import { ToastPortal } from 'toast-notif-study';
+import { propsRef } from 'toast-notif-study/dist/types';
 
 import APILayer from '../../api/index';
 import AddTodo from '../AddTodo';
@@ -11,12 +13,14 @@ import { IList } from '../../types';
 import classes from './ListManager.module.css';
 import ErrorBoundary from '../ErrorBoundary';
 
+
 /**
  * Central lists state manager.
  */
 const ListManager: React.FC = () => {
   // lists state
   const [lists, setLists] = useState<IList[]>([]);
+  const toastRef = useRef<propsRef>(null);
 
   useEffect(() => {
     APILayer.fetchLists()
@@ -31,7 +35,10 @@ const ListManager: React.FC = () => {
    * @param name {string} the name of the list
    */
   const addTodo = (name: string) => {
-    APILayer.addList(name).then(output => setLists(output.data));
+    APILayer.addList(name).then(output => {
+      setLists(output.data);
+      toastRef.current?.addMessage({ mode: output.status, message: output.message })
+    });
   };
 
   /**
@@ -39,7 +46,10 @@ const ListManager: React.FC = () => {
    * @param id {number} - the id of the list
    */
   const deleteList = (id: number) => {
-    APILayer.deleteList(id).then(output => setLists(output.data));
+    APILayer.deleteList(id).then(output => {
+      setLists(output.data);
+      toastRef.current?.addMessage({ mode: output.status, message: output.message })
+    });
   };
 
   /**
@@ -48,9 +58,10 @@ const ListManager: React.FC = () => {
    * @param name {string} - the name of the list
    */
   const updateName = (id: number, name: string) => {
-    APILayer.updateListName(id, name).then(output =>
-      setLists(output.data),
-    );
+    APILayer.updateListName(id, name).then(output => {
+      setLists(output.data);
+      toastRef.current?.addMessage({ mode: output.status, message: output.message })
+    });
   };
 
   return (
@@ -72,6 +83,7 @@ const ListManager: React.FC = () => {
           <h1 className={classes.empty}>Lists not found</h1>
         )}
       </ErrorBoundary>
+      <ToastPortal autoClose={true} autoCloseTime={4000} ref={toastRef} />
     </div>
   );
 };
