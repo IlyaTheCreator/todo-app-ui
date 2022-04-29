@@ -13,7 +13,6 @@ import { IList } from '../../types';
 import classes from './ListManager.module.css';
 import ErrorBoundary from '../ErrorBoundary';
 
-
 /**
  * Central lists state manager.
  */
@@ -37,7 +36,10 @@ const ListManager: React.FC = () => {
   const addTodo = (name: string) => {
     APILayer.addList(name).then(output => {
       setLists(output.data);
-      toastRef.current?.addMessage({ mode: output.status, message: output.message })
+      toastRef.current?.addMessage({
+        mode: output.status,
+        message: output.message,
+      });
     });
   };
 
@@ -48,7 +50,10 @@ const ListManager: React.FC = () => {
   const deleteList = (id: number) => {
     APILayer.deleteList(id).then(output => {
       setLists(output.data);
-      toastRef.current?.addMessage({ mode: output.status, message: output.message })
+      toastRef.current?.addMessage({
+        mode: output.status,
+        message: output.message,
+      });
     });
   };
 
@@ -60,7 +65,10 @@ const ListManager: React.FC = () => {
   const updateName = (id: number, name: string) => {
     APILayer.updateListName(id, name).then(output => {
       setLists(output.data);
-      toastRef.current?.addMessage({ mode: output.status, message: output.message })
+      toastRef.current?.addMessage({
+        mode: output.status,
+        message: output.message,
+      });
     });
   };
 

@@ -18,7 +18,11 @@ interface IResponse {
 }
 
 class APILayer {
-  constructor(public message: string = '', public status: Mode = 'success', public currentListId?: string,) { }
+  constructor(
+    public message: string = '',
+    public status: Mode = 'success',
+    public currentListId?: string,
+  ) {}
 
   async fetchLists(): Promise<AxiosResponse<IList[]>> {
     this.status = 'success';
@@ -26,26 +30,29 @@ class APILayer {
   }
 
   async addList(name: string): Promise<IResponse> {
-    axios.post<IResponse>('lists', { name }).then((res) => {
-      //Если всё успешно то кладём сообщенение из ответа
-      this.message = res.data.message;
-    })
+    axios
+      .post<IResponse>('lists', { name })
+      .then(res => {
+        //Если всё успешно то кладём сообщенение из ответа
+        this.message = res.data.message;
+      })
       .catch((e: Error | AxiosError) => {
-        //При любой ошибке меняем статус, чтобы сменилась иконка на уведомлении 
+        //При любой ошибке меняем статус, чтобы сменилась иконка на уведомлении
         this.status = 'error';
         /**
          * новая какая то штука в axios
-         * пишут, что If you look at the types you'll see that AxiosError 
+         * пишут, что If you look at the types you'll see that AxiosError
          * has a property isAxiosError that is used to detect types, when combined with the builtin typeguard
          * https://github.com/axios/axios/issues/3612#issuecomment-770224236
          */
-        if (axios.isAxiosError(e)) { //Проверяем является ли эта ошибка ошибок из axios
+        if (axios.isAxiosError(e)) {
+          //Проверяем является ли эта ошибка ошибок из axios
           // Кладем сообщение из ошибки
           this.message = e.response?.data.message;
         } else {
           this.message = 'Error';
         }
-      })
+      });
 
     const data = (await this.fetchLists()).data;
 
@@ -54,12 +61,16 @@ class APILayer {
 
   async deleteList(id: number): Promise<IResponse> {
     try {
-      this.message = (await axios.delete<IListRequest>('lists/' + id)).data.message;
-    } catch (e: unknown) { // При указании такого же типа как выше. В try...catch подчеркивает ошибку.
+      this.message = (
+        await axios.delete<IListRequest>('lists/' + id)
+      ).data.message;
+    } catch (e: unknown) {
+      // При указании такого же типа как выше. В try...catch подчеркивает ошибку.
       // Через await не получилось, получается так что срабатывает быстрее строка 68:const data = (await this.fetchLists()).data;
       // И не видно что лист удаляется. Удаляется короче с задержкой на 1 действие.
       this.status = 'error';
-      if (axios.isAxiosError(e)) { //Проверяем является ли эта ошибка ошибок из axios
+      if (axios.isAxiosError(e)) {
+        //Проверяем является ли эта ошибка ошибок из axios
         this.message = e.response?.data.message;
       } else {
         this.message = 'Error';
@@ -67,15 +78,14 @@ class APILayer {
     }
 
     const data = (await this.fetchLists()).data;
-    return { status: this.status, message: this.message, data }
+    return { status: this.status, message: this.message, data };
   }
 
-  async updateListName(
-    id: number,
-    name: string,
-  ): Promise<IResponse> {
+  async updateListName(id: number, name: string): Promise<IResponse> {
     try {
-      this.message = (await axios.put<IListRequest>(`lists/${id}`, { name },)).data.message;
+      this.message = (
+        await axios.put<IListRequest>(`lists/${id}`, { name })
+      ).data.message;
     } catch (e: unknown) {
       this.status = 'error';
       if (axios.isAxiosError(e)) {
@@ -86,7 +96,7 @@ class APILayer {
     }
 
     const data = (await this.fetchLists()).data;
-    return { status: this.status, message: this.message, data }
+    return { status: this.status, message: this.message, data };
   }
 
   async fetchTodos(listId?: string): Promise<AxiosResponse<ITodo[]>> {
