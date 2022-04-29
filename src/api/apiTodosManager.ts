@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios';
-
 import axios from '../axios';
 import APIEntityManagerExtendable from './APIEntityManagerExtendable';
 
@@ -17,6 +15,7 @@ const APITodosManager = APIEntityManagerExtendable.extend<
   IApiTodosManagerExtendedMethods
 >({
   fetchAll: async (id: number) => {
+    // CUSTOM METHODS DEFINITION
     return await axios.get(`cards/filter/?listId=${id}`);
   },
   toggleGlobalIsCompleted: async (isCompletedValue: boolean) => {

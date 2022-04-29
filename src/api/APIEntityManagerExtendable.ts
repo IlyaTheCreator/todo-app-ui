@@ -1,17 +1,24 @@
 import { AxiosResponse } from 'axios';
 
 import axios from '../axios';
-
-type ExtendedClass<Class, Methods, ArgsType extends unknown[] = []> = {
-  new (...args: ArgsType): Class & Methods;
-};
+import { ExtendedClass } from '../types';
 
 /**
  * Class for building other classes for managing APIs
+ * TEntity - generic which describes an entity to work with (e.g,
+ * ITodo or IList)
+ * RequestParams - generic which describes what parameters we will
+ * accept on post or put requests
+ * TResponse - generic which describes axios response type
  */
 class APIEntityManagerExtendable<TEntity, RequestParams, TResponse> {
-  constructor(protected apiPath: string) {}
+  // Accept api path on initialization (e.g, "cards" or "lists")
+  constructor(private apiPath: string) {}
 
+  /* Default methods - methods which are going to be on all apiManagers 
+     from the beginning
+  */
+  // DEFAULT METHODS START
   create = async (
     data: RequestParams,
   ): Promise<AxiosResponse<TResponse>> => {
@@ -36,7 +43,18 @@ class APIEntityManagerExtendable<TEntity, RequestParams, TResponse> {
   deleteSingle = async (id: number): Promise<AxiosResponse<TResponse>> => {
     return await axios.delete(`${this.apiPath}/${id}`);
   };
+  // DEFAULT METHODS END
 
+  /**
+   * Static method (kind of a factory) which returns a class which extends
+   * APIEntityManagerExtendable and has some new methods which we specify
+   * ourselves (newMethods param).
+   * The whole point of this method is to extend existing functionality with
+   * new required methods.
+   *
+   * Just in case:
+   * https://stackoverflow.com/questions/46258728/dynamic-class-methods
+   */
   static extend<TEntity, RequestParams, TResponse, Methods>(
     newMethods: Methods,
   ): ExtendedClass<
@@ -52,6 +70,7 @@ class APIEntityManagerExtendable<TEntity, RequestParams, TResponse> {
       }
     }
 
+    // The extension
     return Class as ExtendedClass<Class, Methods, [string]> & typeof Class;
   }
 }

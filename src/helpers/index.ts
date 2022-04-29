@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { Mode, propsRef } from 'toast-notif-study/dist/types';
 
+// Helper for handling errors in catch() block in managers (todo, lists) functions
 export const handleAxiosError = (
   toastRef: React.RefObject<propsRef>,
   e: AxiosError | Error,
@@ -15,6 +16,7 @@ export const handleAxiosError = (
   }
 };
 
+// Helper for handling displaying toast messages in managers (todo, lists)
 export const displayToastMessage = (
   toastRef: React.RefObject<propsRef>,
   mode: Mode,

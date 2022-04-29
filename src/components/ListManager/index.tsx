@@ -6,15 +6,15 @@ import { propsRef } from 'toast-notif-study/dist/types';
 
 import ErrorBoundary from '../ErrorBoundary';
 import apiListsManager from '../../api/apiListsManager';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
 import AddTodo from '../AddTodo';
 import Lists from '../Lists';
 
 import { IList } from '../../types';
+import { displayToastMessage, handleAxiosError } from '../../helpers';
 
 import classes from './ListManager.module.css';
-import { displayToastMessage, handleAxiosError } from '../../helpers';
 
 /**
  * Central lists state manager.
@@ -22,8 +22,11 @@ import { displayToastMessage, handleAxiosError } from '../../helpers';
 const ListManager: React.FC = () => {
   // lists state
   const [lists, setLists] = useState<IList[]>([]);
+
   const toastRef = useRef<propsRef>(null);
 
+  /* FUNCTIONS START */
+  // Get all lists from db
   const fetchLists = useCallback(() => {
     apiListsManager.fetchAll().then((output: AxiosResponse<IList[]>) => {
       setLists(output?.data);
@@ -34,11 +37,7 @@ const ListManager: React.FC = () => {
     fetchLists();
   }, []);
 
-  /* FUNCTIONS START */
-  /**
-   * Create a new list
-   * @param name {string} the name of the list
-   */
+  // Create a new list
   const addList = useCallback(
     async (name: string) => {
       apiListsManager
@@ -52,10 +51,7 @@ const ListManager: React.FC = () => {
     [apiListsManager],
   );
 
-  /**
-   * Remove list
-   * @param id {number} - the id of the list
-   */
+  // Remove list
   const deleteList = useCallback(
     (id: number) => {
       apiListsManager
@@ -69,11 +65,7 @@ const ListManager: React.FC = () => {
     [apiListsManager],
   );
 
-  /**
-   * Change list name
-   * @param id {number} - the id of the list
-   * @param name {string} - the name of the list
-   */
+  // Change list name
   const updateName = useCallback(
     (id: number, name: string) => {
       apiListsManager

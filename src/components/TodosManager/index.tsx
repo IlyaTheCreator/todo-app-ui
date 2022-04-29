@@ -11,7 +11,7 @@ import classes from './TodosManager.module.scss';
 import { filterNameType, ITodo } from '../../types';
 import ErrorBoundary from '../ErrorBoundary';
 import apiTodosManager from '../../api/apiTodosManager';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { propsRef } from 'toast-notif-study/dist/types';
 import { ToastPortal } from 'toast-notif-study';
 import { displayToastMessage, handleAxiosError } from '../../helpers';
@@ -39,6 +39,7 @@ const TodosManager: React.FC = () => {
   const navigate = useNavigate();
 
   /* FUNCTIONS START */
+  // Get all todos from db
   const fetchTodos = useCallback(() => {
     if (params.id === undefined) {
       navigate('/');
