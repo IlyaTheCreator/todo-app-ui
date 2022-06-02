@@ -34,6 +34,7 @@ const ListManager: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    console.log('kind of debugging');
     fetchLists();
   }, []);
 
