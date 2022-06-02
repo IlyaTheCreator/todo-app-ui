@@ -9,6 +9,8 @@ import ListManager from './components/ListManager';
  * App's root component
  */
 const App: React.FC = () => {
+  console.log('this changes I made them!');
+
   return (
     <BrowserRouter>
       <Layout>
